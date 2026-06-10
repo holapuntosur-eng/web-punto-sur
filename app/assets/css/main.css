@@ -1,0 +1,426 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap');
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+/* ─── Punto Sur — Design Tokens ─── */
+@theme static {
+  /* Tipografía */
+  --font-sans: 'Montserrat', sans-serif;
+
+  /* ── Paleta principal ── */
+  /* Azul primario */
+  --color-azul-950: #00111f;
+  --color-azul-900: #00213c;
+  --color-azul-800: #0a2e4e;
+  --color-azul-700: #153756;
+  --color-azul-600: #1e4268;
+  --color-azul-500: #294969;
+  --color-azul-400: #4a6d8e;
+  --color-azul-300: #82a0c5;
+  --color-azul-200: #aac9ef;
+  --color-azul-100: #d0e4ff;
+  --color-azul-50:  #eef4ff;
+
+  /* Amarillo secundario */
+  --color-amarillo-950: #2a1e00;
+  --color-amarillo-900: #3d2d00;
+  --color-amarillo-800: #534617;
+  --color-amarillo-700: #6c5d2c;
+  --color-amarillo-600: #8a7a3e;
+  --color-amarillo-500: #b09a58;
+  --color-amarillo-400: #d9c58a;
+  --color-amarillo-300: #f3dea1;
+  --color-amarillo-200: #f6e1a4;
+  --color-amarillo-100: #faefc8;
+  --color-amarillo-50:  #fdf8ec;
+
+  /* Celeste terciario */
+  --color-celeste-950: #001524;
+  --color-celeste-900: #011e2f;
+  --color-celeste-800: #062234;
+  --color-celeste-700: #1e384a;
+  --color-celeste-600: #31495c;
+  --color-celeste-500: #4a6577;
+  --color-celeste-400: #6b8a9e;
+  --color-celeste-300: #88a1b7;
+  --color-celeste-200: #b0cae0;
+  --color-celeste-100: #cbe6fd;
+  --color-celeste-50:  #eaf4fd;
+
+  /* Neutros */
+  --color-neutral-950: #0d0f10;
+  --color-neutral-900: #191c1d;
+  --color-neutral-800: #2e3132;
+  --color-neutral-700: #43474d;
+  --color-neutral-600: #73777e;
+  --color-neutral-500: #8d9199;
+  --color-neutral-400: #c3c7ce;
+  --color-neutral-300: #e1e3e4;
+  --color-neutral-200: #e7e8e9;
+  --color-neutral-100: #f3f4f5;
+  --color-neutral-50:  #f8f9fa;
+
+  /* ── Semánticos ── */
+  --color-background:         #f8f9fa;
+  --color-on-background:      #191c1d;
+  --color-surface:            #ffffff;
+  --color-on-surface:         #191c1d;
+  --color-on-surface-variant: #43474d;
+  --color-outline:            #73777e;
+  --color-outline-variant:    #c3c7ce;
+
+  /* ── Sombras con tinte azul ── */
+  --shadow-sm:  0 2px 8px 0 rgba(0, 33, 60, 0.06);
+  --shadow-md:  0 4px 24px 0 rgba(0, 33, 60, 0.08);
+  --shadow-lg:  0 8px 48px 0 rgba(0, 33, 60, 0.10);
+  --shadow-xl:  0 16px 80px 0 rgba(0, 33, 60, 0.14);
+
+  /* ── Radios ── */
+  --radius-sm:   0.5rem;
+  --radius-md:   1rem;
+  --radius-lg:   1.5rem;
+  --radius-xl:   2rem;
+  --radius-2xl:  3rem;
+  --radius-full: 9999px;
+
+  /* ── Transiciones ── */
+  --ease-expo:  cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-inout: cubic-bezier(0.76, 0, 0.24, 1);
+  --duration-fast:  200ms;
+  --duration-base:  400ms;
+  --duration-slow:  700ms;
+  --duration-xslow: 1100ms;
+
+  /* ── Layout ── */
+  --container-max:     1280px;
+  --margin-desktop:    4rem;
+  --margin-tablet:     2.5rem;
+  --margin-mobile:     1.25rem;
+  --gutter:            1.5rem;
+}
+
+/* ─── Reset y base ─── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-background);
+  color: var(--color-on-background);
+  overflow-x: hidden;
+}
+
+/* Cursor personalizado — se activa solo en desktop */
+@media (pointer: fine) {
+  * { cursor: none !important; }
+}
+
+/* ─── Tipografía ─── */
+.text-display {
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-weight: 800;
+}
+
+.text-h1 {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  font-weight: 700;
+}
+
+.text-h2 {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+.text-h3 {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+
+.text-body-lg { font-size: 1.125rem; line-height: 1.65; }
+.text-body-md { font-size: 1rem;     line-height: 1.6; }
+.text-body-sm { font-size: 0.875rem; line-height: 1.5; }
+
+.text-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-azul-400);
+}
+
+/* ─── Layout ─── */
+.container-ps {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--margin-mobile);
+}
+@media (min-width: 768px) {
+  .container-ps { padding-inline: var(--margin-tablet); }
+}
+@media (min-width: 1024px) {
+  .container-ps { padding-inline: var(--margin-desktop); }
+}
+
+/* ─── Botones ─── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.875rem 1.75rem;
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  border: none;
+  cursor: none;
+  transition:
+    transform var(--duration-fast) var(--ease-expo),
+    box-shadow var(--duration-fast) var(--ease-expo),
+    background var(--duration-fast) ease,
+    color var(--duration-fast) ease;
+  white-space: nowrap;
+  user-select: none;
+}
+.btn:hover  { transform: translateY(-2px); }
+.btn:active { transform: translateY(0px);  }
+
+.btn-primary {
+  background: var(--color-azul-900);
+  color: #ffffff;
+}
+.btn-primary:hover {
+  background: var(--color-azul-700);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+  background: var(--color-amarillo-300);
+  color: var(--color-azul-900);
+}
+.btn-secondary:hover {
+  background: var(--color-amarillo-200);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-azul-900);
+  border: 1.5px solid var(--color-azul-900);
+}
+.btn-ghost:hover {
+  background: var(--color-azul-900);
+  color: #ffffff;
+}
+
+/* Ícono circular en botón */
+.btn-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: var(--radius-full);
+  background: rgba(255,255,255,0.18);
+  transition: transform var(--duration-base) var(--ease-expo);
+}
+.btn:hover .btn-arrow { transform: rotate(45deg) scale(1.1); }
+
+/* ─── Cards ─── */
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform var(--duration-base) var(--ease-expo),
+    box-shadow var(--duration-base) var(--ease-expo);
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+.card-celeste {
+  background: color-mix(in srgb, var(--color-celeste-100) 20%, white);
+}
+
+/* ─── Chips / Tags ─── */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.875rem;
+  border-radius: var(--radius-full);
+  background: color-mix(in srgb, var(--color-celeste-200) 35%, white);
+  color: var(--color-azul-700);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ─── Inputs ─── */
+.input-ps {
+  width: 100%;
+  padding: 0.875rem 1.25rem;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--color-celeste-200);
+  background: var(--color-surface);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  color: var(--color-on-surface);
+  outline: none;
+  transition:
+    border-color var(--duration-fast) ease,
+    box-shadow var(--duration-fast) ease;
+}
+.input-ps::placeholder { color: var(--color-azul-400); }
+.input-ps:focus {
+  border-color: var(--color-azul-700);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-azul-200) 35%, transparent);
+}
+textarea.input-ps {
+  border-radius: var(--radius-2xl);
+  resize: vertical;
+  min-height: 140px;
+}
+
+/* ─── Navbar ─── */
+.nav-ps {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 100;
+  padding-block: 1.25rem;
+  transition:
+    background var(--duration-base) ease,
+    backdrop-filter var(--duration-base) ease,
+    box-shadow var(--duration-base) ease;
+}
+.nav-ps.scrolled {
+  background: rgba(248, 249, 250, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 1px 0 var(--color-outline-variant);
+}
+
+/* ─── Animaciones reveal (Intersection Observer) ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity var(--duration-slow) var(--ease-expo),
+    transform var(--duration-slow) var(--ease-expo);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 80ms; }
+.reveal-delay-2 { transition-delay: 160ms; }
+.reveal-delay-3 { transition-delay: 240ms; }
+.reveal-delay-4 { transition-delay: 320ms; }
+.reveal-delay-5 { transition-delay: 400ms; }
+
+/* ─── Split text reveal ─── */
+.split-line {
+  display: block;
+  overflow: hidden;
+  line-height: 1.15;
+}
+.split-line-inner {
+  display: block;
+  transform: translateY(105%);
+  transition: transform var(--duration-slow) var(--ease-expo);
+}
+.split-line.visible .split-line-inner { transform: translateY(0); }
+.split-line:nth-child(2) .split-line-inner { transition-delay: 80ms; }
+.split-line:nth-child(3) .split-line-inner { transition-delay: 160ms; }
+
+/* ─── Línea decorativa ─── */
+.line-grow {
+  display: block;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width var(--duration-slow) var(--ease-expo);
+}
+.line-grow.visible { width: 100%; }
+
+/* ─── Hover link subrayado ─── */
+.link-ps {
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+}
+.link-ps::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width var(--duration-base) var(--ease-expo);
+}
+.link-ps:hover::after { width: 100%; }
+
+/* ─── Stat / número grande ─── */
+.stat-number {
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--color-azul-900);
+}
+
+/* ─── Sección divider ─── */
+hr.divider-ps {
+  border: none;
+  border-top: 1px solid var(--color-outline-variant);
+  margin: 0;
+}
+
+/* ─── Hero ─── */
+.hero-section {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-block-end: 5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ─── Imagen/video de fondo con overlay ─── */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    160deg,
+    rgba(0,33,60,0.55) 0%,
+    rgba(0,33,60,0.15) 60%,
+    transparent 100%
+  );
+}
+
+/* ─── Texto invertido (sobre fondos oscuros) ─── */
+.text-inverse { color: #ffffff; }
+.text-inverse .text-eyebrow { color: var(--color-amarillo-300); }
