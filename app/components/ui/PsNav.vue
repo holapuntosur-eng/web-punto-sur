@@ -1,7 +1,7 @@
 <template>
   <nav
     class="nav-ps"
-    :class="{ scrolled: isScrolled }"
+    :class="{ scrolled: isScrolled, 'menu-open': menuOpen }"
     aria-label="Navegación principal"
   >
     <div class="container-ps">
@@ -9,7 +9,7 @@
 
         <!-- Logo -->
         <a href="#inicio" class="nav-logo" @click.prevent="scrollTo('inicio')" aria-label="Punto Sur — inicio">
-          <span class="nav-logo-text">Punto Sur<span class="nav-logo-dot">.</span></span>
+          <UiPsLogo class="nav-logo-svg" />
         </a>
 
         <!-- Links desktop -->
@@ -161,16 +161,15 @@ onUnmounted(() => {
 }
 
 /* Logo */
-.nav-logo { text-decoration: none; margin-right: auto; }
-.nav-logo-text {
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  color: var(--color-azul-900);
-  line-height: 1;
+.nav-logo {
+  text-decoration: none;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
 }
-.nav-logo-dot { color: var(--color-amarillo-400); }
+.nav-logo-svg { --logo-height: 1.75rem; }
+/* Cuando el menú mobile está abierto, logo en blanco sobre el azul */
+.nav-ps.menu-open .nav-logo-svg { color: #ffffff; }
 
 /* Links desktop */
 .nav-links {
@@ -227,6 +226,7 @@ onUnmounted(() => {
   transition: transform 300ms var(--ease-expo), opacity 200ms ease;
   transform-origin: center;
 }
+.nav-hamburger.open span { background: #ffffff; }
 .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
 .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
 .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }

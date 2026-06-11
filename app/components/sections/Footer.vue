@@ -3,8 +3,8 @@
     <div class="container-ps">
       <div class="footer-top">
         <div class="footer-brand">
-          <a href="#inicio" class="footer-logo">
-            Punto Sur<span class="footer-logo-dot">.</span>
+          <a href="#inicio" class="footer-logo" aria-label="Punto Sur — inicio">
+            <UiPsLogo class="footer-logo-svg" />
           </a>
           <p class="footer-tagline text-body-sm">
             Creatividad con raíces,<br>impacto sin fronteras.
@@ -76,16 +76,14 @@ function scrollTo(id: string) {
 }
 
 .footer-logo {
-  display: block;
-  font-family: var(--font-display);
-  font-size: 1.375rem;
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  color: #ffffff;
+  display: inline-flex;
   text-decoration: none;
-  margin-bottom: 0.875rem;
+  margin-bottom: 1.25rem;
 }
-.footer-logo-dot { color: var(--color-amarillo-300); }
+.footer-logo-svg {
+  --logo-height: 2rem;
+  color: #ffffff;
+}
 .footer-tagline { color: rgba(255,255,255,0.45); line-height: 1.6; }
 
 .footer-nav ul {
