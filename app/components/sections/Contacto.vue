@@ -15,7 +15,7 @@
       <div class="contacto-grid">
         <!-- Formulario -->
         <div class="contacto-form-wrap reveal">
-          <form class="contacto-form" @submit.prevent="submitForm" novalidate>
+          <form class="contacto-form" @submit.prevent="submitForm">
             <div class="form-row">
               <div class="form-group">
                 <label for="nombre" class="form-label">Nombre</label>
@@ -26,6 +26,7 @@
                   class="input-ps"
                   placeholder="Tu nombre"
                   required
+                  autocomplete="name"
                 />
               </div>
               <div class="form-group">
@@ -37,6 +38,7 @@
                   class="input-ps"
                   placeholder="tu@email.com"
                   required
+                  autocomplete="email"
                 />
               </div>
             </div>
@@ -58,11 +60,12 @@
                 class="input-ps"
                 placeholder="Contanos en qué podemos ayudarte..."
                 rows="4"
+                required
               />
             </div>
             <button type="submit" class="btn btn-primary form-submit" :disabled="enviando">
               <span v-if="!enviando">Enviar mensaje</span>
-              <span v-else>Enviando...</span>
+              <span v-else>Preparando email...</span>
               <span class="btn-arrow" v-if="!enviando">
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                   <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -70,10 +73,9 @@
               </span>
             </button>
 
-            <!-- Éxito -->
             <Transition name="fade">
-              <p v-if="enviado" class="form-success">
-                ✓ Mensaje enviado. Te respondemos pronto.
+              <p v-if="enviado" class="form-success" role="status" aria-live="polite">
+                Se abrió tu aplicación de correo con el mensaje preparado.
               </p>
             </Transition>
           </form>
@@ -111,11 +113,19 @@ const enviado  = ref(false)
 
 async function submitForm() {
   enviando.value = true
-  // Simulación — reemplazar con Resend o Formspree
-  await new Promise(r => setTimeout(r, 1200))
+  const subject = encodeURIComponent(`Consulta de ${form.nombre}${form.marca ? ` — ${form.marca}` : ''}`)
+  const body = encodeURIComponent([
+    `Nombre: ${form.nombre}`,
+    `Email: ${form.email}`,
+    form.marca ? `Proyecto: ${form.marca}` : '',
+    '',
+    form.mensaje
+  ].filter(Boolean).join('\n'))
+
+  window.location.href = `mailto:hola.puntosur@gmail.com?subject=${subject}&body=${body}`
+  await new Promise(resolve => setTimeout(resolve, 300))
   enviando.value = false
   enviado.value  = true
-  Object.assign(form, { nombre: '', email: '', marca: '', mensaje: '' })
   setTimeout(() => { enviado.value = false }, 5000)
 }
 </script>
@@ -132,7 +142,7 @@ async function submitForm() {
 }
 .contacto-title {
   font-size: clamp(3rem, 7vw, 6rem);
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.05;
   letter-spacing: -0.035em;
   color: var(--color-azul-900);

@@ -1,7 +1,7 @@
 <template>
   <div>
     <UiPsNav />
-    <main>
+    <main id="contenido" tabindex="-1">
       <SectionsHero />
       <SectionsNosotros />
       <SectionsServicios />

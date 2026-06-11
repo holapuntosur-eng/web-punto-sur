@@ -28,7 +28,7 @@
           <div class="servicio-inner">
             <div class="servicio-header">
               <span class="servicio-num text-eyebrow-inv">0{{ i + 1 }}</span>
-              <span class="servicio-icon" aria-hidden="true">{{ srv.icon }}</span>
+              <UIcon :name="srv.icon" class="servicio-icon" aria-hidden="true" />
             </div>
             <h3 class="servicio-title">{{ srv.title }}</h3>
             <p class="servicio-desc">{{ srv.desc }}</p>
@@ -58,42 +58,42 @@
 const servicios = [
   {
     id: 'diseno-grafico',
-    icon: '✦',
+    icon: 'i-lucide-clapperboard',
     title: 'Diseño Gráfico & Audiovisual',
     desc: 'Branding, identidad visual, logotipos, diseño editorial, packaging y producción audiovisual. Potenciado con IA.',
     tags: ['Branding', 'Video', 'Packaging']
   },
   {
     id: 'digital',
-    icon: '◈',
+    icon: 'i-lucide-panels-top-left',
     title: 'Diseño Digital & UX/UI',
     desc: 'Sitios web, newsletters y experiencias digitales diseñadas desde la usabilidad y la conversión.',
     tags: ['Web', 'UX/UI', 'Newsletter']
   },
   {
     id: 'redes',
-    icon: '◎',
+    icon: 'i-lucide-smartphone',
     title: 'Contenido para Redes',
     desc: 'Piezas estáticas, reels, historias y TikToks con estrategia, consistencia y estilo.',
     tags: ['Instagram', 'Reels', 'TikTok']
   },
   {
     id: 'estrategia',
-    icon: '△',
+    icon: 'i-lucide-chart-no-axes-combined',
     title: 'Estrategia & Marketing',
     desc: 'Planificación de comunicación, segmentación de audiencias y performance.',
     tags: ['Estrategia', 'Performance', 'Audiencias']
   },
   {
     id: 'concepto',
-    icon: '◇',
+    icon: 'i-lucide-lightbulb',
     title: 'Creatividad & Concepto',
     desc: 'Desarrollo de concepto, big idea y campañas integrales que conectan con las personas.',
     tags: ['Concepto', 'Campaña', 'Big idea']
   },
   {
     id: 'ia',
-    icon: '⬡',
+    icon: 'i-lucide-sparkles',
     title: 'IA Aplicada',
     desc: 'Integramos inteligencia artificial en cada etapa del proceso para escalar resultados y reducir tiempos.',
     tags: ['IA', 'Automatización', 'Eficiencia']
@@ -210,7 +210,8 @@ const pasos = [
 .servicio-num { color: var(--color-amarillo-300); }
 
 .servicio-icon {
-  font-size: 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
   color: rgba(255,255,255,0.3);
   transition: color var(--duration-base) ease, transform var(--duration-base) var(--ease-expo);
 }
@@ -269,6 +270,14 @@ const pasos = [
 }
 @media (min-width: 768px) {
   .como-steps { grid-template-columns: repeat(2, 1fr); }
+
+  .como-step {
+    padding: 1.75rem 2rem;
+    border-right: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .como-step:nth-child(odd) { padding-left: 0; }
+  .como-step:nth-child(even) { border-right: none; }
 }
 @media (min-width: 1024px) {
   .como-steps { grid-template-columns: repeat(4, 1fr); }
@@ -285,9 +294,16 @@ const pasos = [
   .como-step {
     border-bottom: none;
     border-right: 1px solid rgba(255,255,255,0.08);
-    padding: 0 1.5rem 0 0;
+    padding: 0 clamp(1.5rem, 2.2vw, 2.5rem);
   }
-  .como-step:last-child { border-right: none; }
+
+  .como-step:nth-child(odd) { padding-left: clamp(1.5rem, 2.2vw, 2.5rem); }
+  .como-step:nth-child(even) { border-right: 1px solid rgba(255,255,255,0.08); }
+  .como-step:first-child { padding-left: 0; }
+  .como-step:last-child {
+    padding-right: 0;
+    border-right: none;
+  }
 }
 
 .como-num { color: var(--color-amarillo-300); }

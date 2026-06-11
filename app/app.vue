@@ -2,6 +2,10 @@
 useHead({
   meta: [{ name: 'viewport', content: 'width=device-width, initial-scale=1' }],
   link: [{ rel: 'icon', href: '/favicon.ico' }],
+  script: [{
+    innerHTML: 'document.documentElement.classList.add(\'js\')',
+    tagPosition: 'head'
+  }],
   htmlAttrs: { lang: 'es' }
 })
 
@@ -18,6 +22,7 @@ useScrollReveal()
 
 <template>
   <UApp>
+    <a href="#contenido" class="skip-link">Saltar al contenido</a>
     <UiPsCursor />
     <NuxtPage />
   </UApp>

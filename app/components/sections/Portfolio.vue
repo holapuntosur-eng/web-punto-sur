@@ -24,6 +24,7 @@
           :key="f.id"
           class="filter-btn"
           :class="{ active: activeFilter === f.id }"
+          :aria-pressed="activeFilter === f.id"
           @click="activeFilter = f.id"
         >
           {{ f.label }}
@@ -48,9 +49,6 @@
             </div>
             <h3 class="proyecto-title">{{ proyecto.title }}</h3>
             <p class="proyecto-cliente text-body-sm">{{ proyecto.cliente }}</p>
-          </div>
-          <div class="proyecto-hover-overlay" aria-hidden="true">
-            <span class="proyecto-hover-icon">↗</span>
           </div>
         </li>
       </TransitionGroup>
@@ -132,6 +130,7 @@ const proyectosFiltrados = computed(() =>
 }
 
 .filter-btn {
+  min-height: 44px;
   padding: 0.4rem 1rem;
   border-radius: var(--radius-full);
   border: 1.5px solid var(--color-outline-variant);
@@ -192,8 +191,9 @@ const proyectosFiltrados = computed(() =>
 }
 
 .proyecto-placeholder {
+  font-family: var(--font-display);
   font-size: 2.5rem;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: -0.04em;
   color: rgba(255,255,255,0.25);
 }
@@ -225,28 +225,6 @@ const proyectosFiltrados = computed(() =>
   color: var(--color-on-surface-variant);
   margin: 0;
 }
-
-/* Hover overlay */
-.proyecto-hover-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 33, 60, 0.6);
-  opacity: 0;
-  transition: opacity var(--duration-base) ease;
-  border-radius: var(--radius-2xl);
-}
-.proyecto-card:hover .proyecto-hover-overlay { opacity: 1; }
-
-.proyecto-hover-icon {
-  font-size: 2.5rem;
-  color: white;
-  transform: rotate(0deg);
-  transition: transform var(--duration-base) var(--ease-expo);
-}
-.proyecto-card:hover .proyecto-hover-icon { transform: rotate(0deg) scale(1.2); }
 
 /* Transición de filtro */
 .portfolio-move,

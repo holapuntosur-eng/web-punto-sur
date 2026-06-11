@@ -1,11 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=general-sans@400,500,600,700&display=swap');
 @import "tailwindcss";
 @import "@nuxt/ui";
 
 /* ─── Punto Sur — Design Tokens ─── */
 @theme static {
   /* Tipografía */
-  --font-sans: 'Montserrat', sans-serif;
+  --font-sans: 'General Sans', sans-serif;      /* body, UI */
+  --font-display: 'Clash Display', sans-serif;  /* headlines */
 
   /* ── Paleta principal ── */
   /* Azul primario */
@@ -60,14 +61,29 @@
   --color-neutral-100: #f3f4f5;
   --color-neutral-50:  #f8f9fa;
 
-  /* ── Semánticos ── */
-  --color-background:         #f8f9fa;
-  --color-on-background:      #191c1d;
+  /* ───────────────────────────────────────────────
+     CAPA 2 · SEMÁNTICOS — aliases por propósito.
+     Referencian primitivos. Cambiar acá re-temáa todo.
+     ─────────────────────────────────────────────── */
+  --color-primary:            var(--color-azul-900);
+  --color-primary-hover:      var(--color-azul-700);
+  --color-primary-active:     var(--color-azul-950);
+  --color-on-primary:         #ffffff;
+  --color-secondary:          var(--color-amarillo-300);
+  --color-secondary-hover:    var(--color-amarillo-200);
+  --color-on-secondary:       var(--color-azul-900);
+  --color-tertiary:           var(--color-celeste-200);
+  --color-on-tertiary:        var(--color-azul-700);
+
+  --color-background:         var(--color-neutral-50);
+  --color-on-background:      var(--color-neutral-900);
   --color-surface:            #ffffff;
-  --color-on-surface:         #191c1d;
-  --color-on-surface-variant: #43474d;
-  --color-outline:            #73777e;
-  --color-outline-variant:    #c3c7ce;
+  --color-on-surface:         var(--color-neutral-900);
+  --color-on-surface-variant: var(--color-neutral-700);
+  --color-muted:              var(--color-neutral-500);
+  --color-outline:            var(--color-neutral-600);
+  --color-outline-variant:    var(--color-neutral-400);
+  --color-accent:             var(--color-amarillo-500);
 
   /* ── Sombras con tinte azul ── */
   --shadow-sm:  0 2px 8px 0 rgba(0, 33, 60, 0.06);
@@ -97,6 +113,31 @@
   --margin-tablet:     2.5rem;
   --margin-mobile:     1.25rem;
   --gutter:            1.5rem;
+
+  /* ───────────────────────────────────────────────
+     CAPA 3 · COMPONENTE — referencian semánticos.
+     Permiten ajustar un componente sin tocar el resto.
+     ─────────────────────────────────────────────── */
+  /* Button */
+  --button-bg:           var(--color-primary);
+  --button-bg-hover:     var(--color-primary-hover);
+  --button-fg:           var(--color-on-primary);
+  --button-radius:       var(--radius-full);
+  --button-shadow-hover: var(--shadow-md);
+  /* Card */
+  --card-bg:             var(--color-surface);
+  --card-radius:         var(--radius-2xl);
+  --card-shadow:         var(--shadow-sm);
+  --card-shadow-hover:   var(--shadow-lg);
+  /* Chip */
+  --chip-bg:             color-mix(in srgb, var(--color-tertiary) 35%, white);
+  --chip-fg:             var(--color-on-tertiary);
+  --chip-radius:         var(--radius-full);
+  /* Input */
+  --input-bg:            var(--color-surface);
+  --input-border:        var(--color-celeste-200);
+  --input-border-focus:  var(--color-primary-hover);
+  --input-radius:        var(--radius-full);
 }
 
 /* ─── Reset y base ─── */
@@ -116,30 +157,58 @@ body {
 }
 
 /* Cursor personalizado — se activa solo en desktop */
-@media (pointer: fine) {
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   * { cursor: none !important; }
 }
 
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 10000;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-full);
+  background: var(--color-azul-900);
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-decoration: none;
+  transform: translateY(-160%);
+  transition: transform var(--duration-fast) ease;
+}
+.skip-link:focus { transform: translateY(0); }
+
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 3px solid var(--color-amarillo-400);
+  outline-offset: 3px;
+}
+
 /* ─── Tipografía ─── */
+/* Headlines en Clash Display */
+h1, h2, h3, h4,
+.text-display, .text-h1, .text-h2, .text-h3 {
+  font-family: var(--font-display);
+}
+
 .text-display {
   font-size: clamp(3.5rem, 8vw, 7rem);
   line-height: 1.05;
   letter-spacing: -0.03em;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .text-h1 {
   font-size: clamp(2.5rem, 5vw, 4.5rem);
   line-height: 1.1;
   letter-spacing: -0.025em;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .text-h2 {
   font-size: clamp(2rem, 3.5vw, 3rem);
   line-height: 1.15;
   letter-spacing: -0.02em;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .text-h3 {
@@ -188,7 +257,8 @@ body {
   letter-spacing: 0.02em;
   text-decoration: none;
   border: none;
-  cursor: none;
+  min-height: 44px;
+  cursor: pointer;
   transition:
     transform var(--duration-fast) var(--ease-expo),
     box-shadow var(--duration-fast) var(--ease-expo),
@@ -294,7 +364,7 @@ body {
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-azul-200) 35%, transparent);
 }
 textarea.input-ps {
-  border-radius: var(--radius-2xl);
+  border-radius: var(--radius-lg);
   resize: vertical;
   min-height: 140px;
 }
@@ -319,14 +389,14 @@ textarea.input-ps {
 }
 
 /* ─── Animaciones reveal (Intersection Observer) ─── */
-.reveal {
+.js .reveal {
   opacity: 0;
   transform: translateY(28px);
   transition:
     opacity var(--duration-slow) var(--ease-expo),
     transform var(--duration-slow) var(--ease-expo);
 }
-.reveal.visible { opacity: 1; transform: translateY(0); }
+.js .reveal.visible { opacity: 1; transform: translateY(0); }
 .reveal-delay-1 { transition-delay: 80ms; }
 .reveal-delay-2 { transition-delay: 160ms; }
 .reveal-delay-3 { transition-delay: 240ms; }
@@ -341,10 +411,12 @@ textarea.input-ps {
 }
 .split-line-inner {
   display: block;
+}
+.js .split-line-inner {
   transform: translateY(105%);
   transition: transform var(--duration-slow) var(--ease-expo);
 }
-.split-line.visible .split-line-inner { transform: translateY(0); }
+.js .split-line.visible .split-line-inner { transform: translateY(0); }
 .split-line:nth-child(2) .split-line-inner { transition-delay: 80ms; }
 .split-line:nth-child(3) .split-line-inner { transition-delay: 160ms; }
 
@@ -378,8 +450,9 @@ textarea.input-ps {
 
 /* ─── Stat / número grande ─── */
 .stat-number {
+  font-family: var(--font-display);
   font-size: clamp(3rem, 7vw, 5.5rem);
-  font-weight: 800;
+  font-weight: 600;
   line-height: 1;
   letter-spacing: -0.04em;
   color: var(--color-azul-900);
@@ -424,3 +497,20 @@ hr.divider-ps {
 /* ─── Texto invertido (sobre fondos oscuros) ─── */
 .text-inverse { color: #ffffff; }
 .text-inverse .text-eyebrow { color: var(--color-amarillo-300); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .js .reveal,
+  .js .split-line-inner {
+    opacity: 1;
+    transform: none;
+  }
+}

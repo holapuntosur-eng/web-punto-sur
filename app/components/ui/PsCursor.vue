@@ -49,7 +49,7 @@ function animate() {
 
 onMounted(() => {
   // Solo en dispositivos con puntero preciso (mouse)
-  isDesktop.value = window.matchMedia('(pointer: fine)').matches
+  isDesktop.value = window.matchMedia('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)').matches
   if (!isDesktop.value) return
 
   mouseX.value = window.innerWidth / 2

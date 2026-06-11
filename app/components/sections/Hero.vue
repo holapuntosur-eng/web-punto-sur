@@ -50,7 +50,12 @@
 
     <!-- Scroll indicator -->
     <div class="hero-scroll reveal reveal-delay-4" aria-hidden="true">
-      <span class="hero-scroll-line" />
+      <span class="hero-scroll-line">
+        <span
+          class="hero-scroll-progress"
+          :style="{ transform: `scaleY(${scrollProgress})` }"
+        />
+      </span>
       <span class="text-eyebrow">scroll</span>
     </div>
 
@@ -84,11 +89,11 @@ onMounted(() => {
   const section = document.getElementById('inicio')
   const onScroll = () => {
     if (!section) return
-    const h = section.offsetHeight
-    const p = Math.min(window.scrollY / h, 1)
-    scrollProgress.value = p
+    const scrollableDistance = Math.max(section.offsetHeight - window.innerHeight * 0.2, 1)
+    scrollProgress.value = Math.min(Math.max(window.scrollY / scrollableDistance, 0), 1)
   }
   window.addEventListener('scroll', onScroll, { passive: true })
+  onScroll()
   onUnmounted(() => window.removeEventListener('scroll', onScroll))
 })
 </script>
@@ -101,7 +106,7 @@ onMounted(() => {
   justify-content: center;
   position: relative;
   overflow: hidden;
-  padding-block: 7rem 5rem;
+  padding-block: 6rem 3rem;
 }
 
 .hero-content {
@@ -109,15 +114,15 @@ onMounted(() => {
   z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: 1.5rem;
 }
 
 .hero-eyebrow { display: flex; }
 
 /* Headline */
 .hero-headline {
-  font-size: clamp(3.5rem, 9vw, 8rem);
-  font-weight: 800;
+  font-size: clamp(3.5rem, 7.3vw, 7rem);
+  font-weight: 700;
   line-height: 1.02;
   letter-spacing: -0.035em;
   color: var(--color-azul-900);
@@ -131,6 +136,15 @@ onMounted(() => {
 
 .hero-headline-accent {
   color: var(--color-amarillo-500);
+}
+
+@media (max-width: 479px) {
+  .hero-section { padding-block: 5.5rem 2rem; }
+  .hero-headline { font-size: clamp(2.75rem, 14vw, 4rem); }
+  .hero-headline-line2 { padding-left: 1rem; }
+  .hero-headline-line3 { padding-left: 2rem; }
+  .hero-desc { white-space: normal; }
+  .hero-actions .btn { flex: 1; justify-content: center; }
 }
 
 /* Bottom */
@@ -174,32 +188,39 @@ onMounted(() => {
   z-index: 1;
 }
 
+@media (max-width: 767px) {
+  .hero-scroll {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    flex-shrink: 0;
+    margin-top: 1.5rem;
+    gap: 0.5rem;
+  }
+
+  .hero-scroll-line { height: 36px; }
+}
+
 .hero-scroll-line {
   display: block;
-  width: 1px;
+  width: 2px;
   height: 80px;
-  background: transparent;
+  background: color-mix(in srgb, var(--color-outline-variant) 55%, transparent);
   border-radius: 999px;
   position: relative;
   overflow: hidden;
 }
 
-/* Pulso loop en gris claro */
-.hero-scroll-line::after {
-  content: '';
+.hero-scroll-progress {
   position: absolute;
   inset: 0;
-  width: 1px;
+  display: block;
   border-radius: 999px;
-  background: var(--color-outline-variant);
+  background: var(--color-azul-900);
   transform-origin: top center;
-  animation: lineEntrance 2s var(--ease-expo) infinite;
-}
-
-@keyframes lineEntrance {
-  0%   { transform: scaleY(0); opacity: 0.8; }
-  60%  { transform: scaleY(1); opacity: 0.4; }
-  100% { transform: scaleY(1); opacity: 0; }
+  transition: transform 90ms linear;
+  will-change: transform;
 }
 
 /* Decoración fondo */

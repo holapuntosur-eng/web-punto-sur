@@ -77,8 +77,9 @@ function scrollTo(id: string) {
 
 .footer-logo {
   display: block;
-  font-size: 1.25rem;
-  font-weight: 800;
+  font-family: var(--font-display);
+  font-size: 1.375rem;
+  font-weight: 600;
   letter-spacing: -0.03em;
   color: #ffffff;
   text-decoration: none;

@@ -44,9 +44,10 @@
         <button
           class="nav-hamburger"
           :class="{ open: menuOpen }"
-          @click="menuOpen = !menuOpen"
+          @click="toggleMenu"
           :aria-expanded="menuOpen"
-          aria-label="Abrir menú"
+          aria-controls="menu-mobile"
+          :aria-label="menuOpen ? 'Cerrar menú' : 'Abrir menú'"
         >
           <span /><span /><span />
         </button>
@@ -55,7 +56,7 @@
 
     <!-- Menú mobile -->
     <Transition name="menu">
-      <div v-if="menuOpen" class="nav-mobile-menu">
+      <div v-if="menuOpen" id="menu-mobile" class="nav-mobile-menu">
         <ul role="list">
           <li v-for="(item, i) in navItems" :key="item.id">
             <a
@@ -88,6 +89,7 @@ const navItems = [
 const isScrolled    = ref(false)
 const menuOpen      = ref(false)
 const activeSection = ref('inicio')
+let observers: IntersectionObserver[] = []
 
 function scrollTo(id: string) {
   const el = document.getElementById(id)
@@ -102,30 +104,52 @@ function mobileNav(id: string) {
   setTimeout(() => scrollTo(id), 100)
 }
 
+function toggleMenu() {
+  menuOpen.value = !menuOpen.value
+}
+
+function closeMenu() {
+  menuOpen.value = false
+}
+
+function onKeydown(event: KeyboardEvent) {
+  if (event.key === 'Escape' && menuOpen.value) closeMenu()
+}
+
+function onScroll() {
+  isScrolled.value = window.scrollY > 40
+}
+
+watch(menuOpen, open => {
+  document.body.style.overflow = open ? 'hidden' : ''
+})
+
 onMounted(() => {
-  // Scroll detectado
-  const onScroll = () => { isScrolled.value = window.scrollY > 40 }
   window.addEventListener('scroll', onScroll, { passive: true })
+  window.addEventListener('keydown', onKeydown)
 
   // Active section con IntersectionObserver
   const sections = ['inicio', 'nosotros', 'servicios', 'portfolio', 'contacto']
-  const observers: IntersectionObserver[] = []
-
   sections.forEach(id => {
     const el = document.getElementById(id)
     if (!el) return
     const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) activeSection.value = id },
+      ([entry]) => {
+        if (entry?.isIntersecting) activeSection.value = id
+      },
       { threshold: 0.4 }
     )
     obs.observe(el)
     observers.push(obs)
   })
 
-  onUnmounted(() => {
-    window.removeEventListener('scroll', onScroll)
-    observers.forEach(o => o.disconnect())
-  })
+})
+
+onUnmounted(() => {
+  document.body.style.overflow = ''
+  window.removeEventListener('scroll', onScroll)
+  window.removeEventListener('keydown', onKeydown)
+  observers.forEach(observer => observer.disconnect())
 })
 </script>
 
@@ -139,9 +163,9 @@ onMounted(() => {
 /* Logo */
 .nav-logo { text-decoration: none; margin-right: auto; }
 .nav-logo-text {
-  font-family: var(--font-sans);
-  font-size: 1.125rem;
-  font-weight: 800;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
   letter-spacing: -0.03em;
   color: var(--color-azul-900);
   line-height: 1;
@@ -186,7 +210,11 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  padding: 0.5rem;
+  width: 44px;
+  height: 44px;
+  padding: 0.625rem;
+  align-items: center;
+  justify-content: center;
   background: none;
   border: none;
   margin-left: auto;
@@ -234,12 +262,14 @@ onMounted(() => {
   display: flex;
   align-items: baseline;
   gap: 1rem;
+  font-family: var(--font-display);
   font-size: clamp(2rem, 8vw, 3.5rem);
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: -0.03em;
   color: rgba(255,255,255,0.85);
   text-decoration: none;
   padding-block: 0.5rem;
+  min-height: 52px;
   transition: color 200ms ease;
 }
 .nav-mobile-link:hover { color: var(--color-amarillo-300); }

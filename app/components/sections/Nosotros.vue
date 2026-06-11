@@ -148,8 +148,9 @@ const stats = [
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: var(--font-display);
   font-size: 1.25rem;
-  font-weight: 800;
+  font-weight: 600;
   flex-shrink: 0;
   letter-spacing: -0.02em;
 }
