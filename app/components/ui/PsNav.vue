@@ -38,9 +38,10 @@
 
         <!-- CTA desktop -->
         <a
-          href="#contacto"
+          :href="whatsappHref"
           class="btn btn-primary nav-cta"
-          @click.prevent="scrollTo('contacto')"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           Hablemos
           <span class="btn-arrow">
@@ -100,9 +101,11 @@
           </li>
         </ul>
         <a
-          href="#contacto"
+          :href="whatsappHref"
           class="btn btn-primary nav-mobile-cta"
-          @click.prevent="mobileNav('contacto')"
+          target="_blank"
+          rel="noopener noreferrer"
+          @click="closeMenu"
         >
           Hablemos →
         </a>
@@ -118,6 +121,7 @@ const navItems = [
   { id: 'servicios', label: 'Servicios' },
   { id: 'contacto', label: 'Contacto' }
 ]
+const whatsappHref = 'https://wa.me/5491131660452?text=Hola%20Punto%20Sur%2C%20quiero%20hablar%20sobre%20un%20proyecto.'
 
 const isScrolled = ref(false)
 const menuOpen = ref(false)

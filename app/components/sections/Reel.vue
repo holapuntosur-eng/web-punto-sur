@@ -35,7 +35,7 @@
 
 <style scoped>
 .section-reel {
-  padding-block: clamp(2.5rem, 7vw, 6rem) clamp(4rem, 9vw, 8rem);
+  padding-block: clamp(0.75rem, 3vw, 2.75rem) clamp(4rem, 9vw, 8rem);
   background:
     radial-gradient(circle at 12% 18%, color-mix(in srgb, var(--color-amarillo-100) 66%, transparent), transparent 22rem),
     var(--color-background);
@@ -81,6 +81,10 @@
 }
 
 @media (max-width: 640px) {
+  .section-reel {
+    padding-block-start: 0.5rem;
+  }
+
   .reel-stage {
     min-height: auto;
     aspect-ratio: 3 / 4;

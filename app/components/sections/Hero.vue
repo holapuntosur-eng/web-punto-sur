@@ -113,9 +113,10 @@
                 </span>
               </a>
               <a
-                href="#contacto"
+                :href="whatsappHref"
                 class="btn btn-ghost"
-                @click.prevent="scrollTo('contacto')"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 Hablemos
               </a>
@@ -158,6 +159,7 @@ const titleLines = [
   { text: 'impacto', accent: 'sin' },
   { text: 'fronteras.' }
 ]
+const whatsappHref = 'https://wa.me/5491131660452?text=Hola%20Punto%20Sur%2C%20quiero%20hablar%20sobre%20un%20proyecto.'
 
 function scrollTo(id: string) {
   const el = document.getElementById(id)
@@ -221,12 +223,12 @@ function scrollTo(id: string) {
 }
 
 .hero-shell {
-  min-height: 100dvh;
+  min-height: clamp(42rem, 92dvh, 58rem);
   position: relative;
   z-index: 1;
   display: flex;
   flex-direction: column;
-  padding-block: clamp(6rem, 10vw, 8rem) clamp(2rem, 5vw, 3.5rem);
+  padding-block: clamp(6rem, 10vw, 8rem) clamp(1rem, 3vw, 2rem);
 }
 
 .hero-kicker {
@@ -439,7 +441,8 @@ function scrollTo(id: string) {
 
 @media (max-width: 479px) {
   .hero-shell {
-    padding-block: 5.5rem 2rem;
+    min-height: auto;
+    padding-block: 5.5rem 0.9rem;
   }
 
   .hero-copy {
