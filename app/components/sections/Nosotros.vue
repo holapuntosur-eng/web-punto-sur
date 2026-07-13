@@ -130,8 +130,8 @@ let statsObserver: IntersectionObserver | null = null
 
 const statItems = [
   { value: 10, suffix: '+', label: 'Años de experiencia' },
-  { value: 50, suffix: '+', label: 'Marcas trabajadas' },
-  { value: 4, suffix: '', label: 'Países alcanzados' },
+  { value: 20, suffix: '+', label: 'Marcas trabajadas' },
+  { value: 6, suffix: '', label: 'Países alcanzados' },
   { value: Number.POSITIVE_INFINITY, suffix: '', label: 'Proyectos con propósito' }
 ]
 

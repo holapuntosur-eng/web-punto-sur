@@ -159,6 +159,34 @@
               @somos_puntosur
             </a>
           </div>
+          <a
+            :href="whatsappHref"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contacto-info-block contacto-whatsapp"
+          >
+            <span class="contacto-whatsapp-copy">
+              <span class="text-eyebrow contacto-info-label">
+                WhatsApp
+              </span>
+              <span class="contacto-info-val">
+                Escaneá o escribinos
+              </span>
+              <span class="contacto-info-sub text-body-sm">
+                Respuesta directa para nuevos proyectos.
+              </span>
+            </span>
+            <span
+              class="contacto-qr"
+              aria-hidden="true"
+            >
+              <img
+                :src="whatsappQrSrc"
+                alt=""
+                loading="lazy"
+              >
+            </span>
+          </a>
           <div class="contacto-info-block">
             <p class="text-eyebrow contacto-info-label">
               Ubicación
@@ -178,6 +206,8 @@
 
 <script setup lang="ts">
 const formEndpoint = 'https://formspree.io/f/mbdnjqvr'
+const whatsappHref = 'https://wa.me/5491131660452?text=Hola%20Punto%20Sur%2C%20quiero%20hablar%20sobre%20un%20proyecto.'
+const whatsappQrSrc = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=12&data=${encodeURIComponent(whatsappHref)}`
 const form = reactive({ nombre: '', email: '', marca: '', mensaje: '' })
 const enviando = ref(false)
 const enviado = ref(false)
@@ -354,6 +384,35 @@ async function submitForm() {
   background: rgba(255,255,255,0.8);
   transform: translateY(-4px);
 }
+.contacto-whatsapp {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+  color: inherit;
+  text-decoration: none;
+}
+.contacto-whatsapp-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.contacto-qr {
+  display: grid;
+  width: clamp(5.4rem, 9vw, 7rem);
+  aspect-ratio: 1;
+  place-items: center;
+  padding: 0.45rem;
+  border: 1px solid color-mix(in srgb, var(--color-azul-900) 10%, transparent);
+  border-radius: 1.1rem;
+  background: rgba(255,255,255,0.82);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.6);
+}
+.contacto-qr img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 .contacto-info-label { margin: 0; }
 .contacto-info-val {
   font-size: clamp(1rem, 1.8vw, 1.28rem);
@@ -364,6 +423,16 @@ async function submitForm() {
 }
 a.contacto-info-val:hover { color: var(--color-azul-600); }
 .contacto-info-sub { color: var(--color-on-surface-variant); margin: 0; }
+
+@media (max-width: 479px) {
+  .contacto-whatsapp {
+    grid-template-columns: 1fr;
+  }
+
+  .contacto-qr {
+    width: 7rem;
+  }
+}
 
 /* Fade transition */
 .fade-enter-active, .fade-leave-active { transition: opacity 400ms ease; }

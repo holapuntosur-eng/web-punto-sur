@@ -11,10 +11,6 @@ export function useScrollReveal(options?: IntersectionObserverInit) {
   }
 
   onMounted(() => {
-    const targets = document.querySelectorAll<HTMLElement>('.reveal, .split-line, .line-grow')
-
-    if (!targets.length) return
-
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -24,7 +20,24 @@ export function useScrollReveal(options?: IntersectionObserverInit) {
       })
     }, defaults)
 
-    targets.forEach(el => observer.observe(el))
+    function observeTargets() {
+      const targets = document.querySelectorAll<HTMLElement>('.reveal:not(.visible), .split-line:not(.visible), .line-grow:not(.visible)')
+
+      targets.forEach((el) => {
+        const rect = el.getBoundingClientRect()
+        const isAlreadyVisible = rect.top < window.innerHeight && rect.bottom > 0
+
+        if (isAlreadyVisible) {
+          el.classList.add('visible')
+          return
+        }
+
+        observer.observe(el)
+      })
+    }
+
+    observeTargets()
+    window.setTimeout(observeTargets, 250)
 
     onUnmounted(() => observer.disconnect())
   })
