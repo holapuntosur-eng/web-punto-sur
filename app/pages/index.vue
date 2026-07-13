@@ -1,11 +1,15 @@
 <template>
   <div>
     <UiPsNav />
-    <main id="contenido" tabindex="-1">
+    <main
+      id="contenido"
+      tabindex="-1"
+    >
       <SectionsHero />
+      <SectionsReel />
       <SectionsNosotros />
-      <SectionsServicios />
       <SectionsPortfolio />
+      <SectionsServicios />
       <SectionsContacto />
     </main>
     <SectionsFooter />

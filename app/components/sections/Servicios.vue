@@ -1,10 +1,13 @@
 <template>
-  <section id="servicios" class="section-servicios" aria-label="Servicios">
+  <section
+    id="servicios"
+    class="section-servicios"
+    aria-label="Servicios"
+  >
     <div class="container-ps">
-
       <div class="section-header reveal">
-        <span class="text-eyebrow section-eyebrow-inv">03 — Nuestras herramientas</span>
-        <hr class="divider-inv" />
+        <span class="text-eyebrow section-eyebrow-inv">04 — Nuestras herramientas</span>
+        <hr class="divider-inv">
       </div>
 
       <div class="servicios-top">
@@ -18,7 +21,10 @@
       </div>
 
       <!-- Grid de servicios -->
-      <ul class="servicios-grid" role="list">
+      <ul
+        class="servicios-grid"
+        role="list"
+      >
         <li
           v-for="(srv, i) in servicios"
           :key="srv.id"
@@ -28,28 +34,28 @@
           <div class="servicio-inner">
             <div class="servicio-header">
               <span class="servicio-num text-eyebrow-inv">0{{ i + 1 }}</span>
-              <UIcon :name="srv.icon" class="servicio-icon" aria-hidden="true" />
+              <UIcon
+                :name="srv.icon"
+                class="servicio-icon"
+                aria-hidden="true"
+              />
             </div>
-            <h3 class="servicio-title">{{ srv.title }}</h3>
-            <p class="servicio-desc">{{ srv.desc }}</p>
+            <h3 class="servicio-title">
+              {{ srv.title }}
+            </h3>
+            <p class="servicio-desc">
+              {{ srv.desc }}
+            </p>
             <div class="servicio-tags">
-              <span v-for="tag in srv.tags" :key="tag" class="chip chip-inv">{{ tag }}</span>
+              <span
+                v-for="tag in srv.tags"
+                :key="tag"
+                class="chip chip-inv"
+              >{{ tag }}</span>
             </div>
           </div>
         </li>
       </ul>
-
-      <!-- Cómo trabajamos -->
-      <div class="como-trabajamos reveal">
-        <h3 class="text-h3 como-title">Cómo trabajamos</h3>
-        <ol class="como-steps" role="list">
-          <li v-for="(step, i) in pasos" :key="i" class="como-step reveal" :class="`reveal-delay-${i + 1}`">
-            <span class="como-num text-eyebrow">{{ String(i + 1).padStart(2, '0') }}</span>
-            <span class="como-text text-body-md">{{ step }}</span>
-          </li>
-        </ol>
-      </div>
-
     </div>
   </section>
 </template>
@@ -97,22 +103,20 @@ const servicios = [
     title: 'IA Aplicada',
     desc: 'Integramos inteligencia artificial en cada etapa del proceso para escalar resultados y reducir tiempos.',
     tags: ['IA', 'Automatización', 'Eficiencia']
-  },
-]
-
-const pasos = [
-  'Exploramos tu marca y su contexto competitivo.',
-  'Definimos una estrategia clara y medible.',
-  'Diseñamos y producimos piezas que comunican con propósito.',
-  'Acompañamos el proceso y optimizamos para asegurar resultados reales.',
+  }
 ]
 </script>
 
 <style scoped>
 .section-servicios {
   padding-block: clamp(5rem, 10vw, 9rem);
-  background: var(--color-azul-900);
+  background:
+    radial-gradient(circle at 85% 8%, rgba(176, 202, 224, 0.16), transparent 24rem),
+    radial-gradient(circle at 12% 86%, rgba(243, 222, 161, 0.12), transparent 22rem),
+    var(--color-azul-900);
   color: #ffffff;
+  position: relative;
+  overflow: hidden;
 }
 
 .section-header {
@@ -153,22 +157,26 @@ const pasos = [
 .servicios-title {
   color: #ffffff;
   margin: 0;
+  font-size: clamp(2.6rem, 5.5vw, 5.75rem);
+  font-weight: 500;
+  line-height: 0.98;
 }
 
 .servicios-sub {
-  color: rgba(255,255,255,0.6);
+  color: rgba(255,255,255,0.66);
   margin: 0;
+  max-width: 28ch;
 }
 
 /* Grid */
 .servicios-grid {
   list-style: none;
   padding: 0;
-  margin: 0 0 clamp(3rem, 8vw, 7rem);
+  margin: 0;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 0;
-  border-top: 1px solid rgba(255,255,255,0.12);
+  gap: 0.875rem;
+  border-top: none;
 }
 @media (min-width: 640px) {
   .servicios-grid { grid-template-columns: repeat(2, 1fr); }
@@ -178,27 +186,35 @@ const pasos = [
 }
 
 .servicio-item {
-  border-bottom: 1px solid rgba(255,255,255,0.12);
-  border-right: none;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: clamp(1.5rem, 3vw, 2.25rem);
+  background: rgba(255,255,255,0.045);
+  overflow: hidden;
+  box-shadow: 0 1.25rem 4rem rgba(0, 0, 0, 0.09);
+  transition:
+    border-color var(--duration-base) ease,
+    background var(--duration-base) ease,
+    transform var(--duration-base) var(--ease-expo);
 }
 @media (min-width: 640px) {
-  .servicio-item:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.12); }
+  .servicio-item:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.1); }
 }
 @media (min-width: 1024px) {
-  .servicio-item { border-right: 1px solid rgba(255,255,255,0.12); }
-  .servicio-item:nth-child(3n) { border-right: none; }
+  .servicio-item { border-right: 1px solid rgba(255,255,255,0.1); }
+  .servicio-item:nth-child(3n) { border-right: 1px solid rgba(255,255,255,0.1); }
+}
+.servicio-item:hover {
+  border-color: rgba(243, 222, 161, 0.34);
+  background: rgba(255,255,255,0.072);
+  transform: translateY(-8px);
 }
 
 .servicio-inner {
-  padding: 2rem 1.5rem;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
   display: flex;
   flex-direction: column;
-  gap: 0.875rem;
+  gap: 1.1rem;
   height: 100%;
-  transition: background var(--duration-base) ease;
-}
-.servicio-item:hover .servicio-inner {
-  background: rgba(255,255,255,0.04);
 }
 
 .servicio-header {
@@ -210,9 +226,12 @@ const pasos = [
 .servicio-num { color: var(--color-amarillo-300); }
 
 .servicio-icon {
-  width: 1.5rem;
-  height: 1.5rem;
-  color: rgba(255,255,255,0.3);
+  width: 2.4rem;
+  height: 2.4rem;
+  padding: 0.58rem;
+  border-radius: var(--radius-full);
+  color: rgba(255,255,255,0.68);
+  background: rgba(255,255,255,0.08);
   transition: color var(--duration-base) ease, transform var(--duration-base) var(--ease-expo);
 }
 .servicio-item:hover .servicio-icon {
@@ -221,11 +240,12 @@ const pasos = [
 }
 
 .servicio-title {
-  font-size: 1.0625rem;
-  font-weight: 700;
+  font-size: clamp(1.2rem, 2vw, 1.65rem);
+  font-weight: 600;
   color: #ffffff;
   margin: 0;
-  line-height: 1.3;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
 }
 
 .servicio-desc {
@@ -244,68 +264,8 @@ const pasos = [
 }
 
 .chip-inv {
-  background: rgba(255,255,255,0.08);
-  color: rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.085);
+  color: rgba(255,255,255,0.76);
+  border: 1px solid rgba(255,255,255,0.06);
 }
-
-/* Cómo trabajamos */
-.como-trabajamos {
-  border-top: 1px solid rgba(255,255,255,0.12);
-  padding-top: clamp(2.5rem, 5vw, 4rem);
-}
-
-.como-title {
-  color: #ffffff;
-  margin-bottom: 2.5rem;
-}
-
-.como-steps {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0;
-  counter-reset: steps;
-}
-@media (min-width: 768px) {
-  .como-steps { grid-template-columns: repeat(2, 1fr); }
-
-  .como-step {
-    padding: 1.75rem 2rem;
-    border-right: 1px solid rgba(255,255,255,0.08);
-  }
-
-  .como-step:nth-child(odd) { padding-left: 0; }
-  .como-step:nth-child(even) { border-right: none; }
-}
-@media (min-width: 1024px) {
-  .como-steps { grid-template-columns: repeat(4, 1fr); }
-}
-
-.como-step {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  padding: 1.5rem 1.5rem 1.5rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-@media (min-width: 1024px) {
-  .como-step {
-    border-bottom: none;
-    border-right: 1px solid rgba(255,255,255,0.08);
-    padding: 0 clamp(1.5rem, 2.2vw, 2.5rem);
-  }
-
-  .como-step:nth-child(odd) { padding-left: clamp(1.5rem, 2.2vw, 2.5rem); }
-  .como-step:nth-child(even) { border-right: 1px solid rgba(255,255,255,0.08); }
-  .como-step:first-child { padding-left: 0; }
-  .como-step:last-child {
-    padding-right: 0;
-    border-right: none;
-  }
-}
-
-.como-num { color: var(--color-amarillo-300); }
-.como-text { color: rgba(255,255,255,0.7); }
 </style>

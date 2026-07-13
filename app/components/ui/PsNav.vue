@@ -1,20 +1,30 @@
 <template>
   <nav
     class="nav-ps"
-    :class="{ scrolled: isScrolled, 'menu-open': menuOpen }"
+    :class="{ 'scrolled': isScrolled, 'menu-open': menuOpen }"
     aria-label="Navegación principal"
   >
     <div class="container-ps">
       <div class="nav-inner">
-
         <!-- Logo -->
-        <a href="#inicio" class="nav-logo" @click.prevent="scrollTo('inicio')" aria-label="Punto Sur — inicio">
+        <a
+          href="#inicio"
+          class="nav-logo"
+          aria-label="Punto Sur — inicio"
+          @click.prevent="scrollTo('inicio')"
+        >
           <UiPsLogo class="nav-logo-svg" />
         </a>
 
         <!-- Links desktop -->
-        <ul class="nav-links" role="list">
-          <li v-for="item in navItems" :key="item.id">
+        <ul
+          class="nav-links"
+          role="list"
+        >
+          <li
+            v-for="item in navItems"
+            :key="item.id"
+          >
             <a
               :href="`#${item.id}`"
               class="nav-link link-ps"
@@ -34,8 +44,20 @@
         >
           Hablemos
           <span class="btn-arrow">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-              <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 12 12"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M2 10L10 2M10 2H4M10 2V8"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
             </svg>
           </span>
         </a>
@@ -44,10 +66,10 @@
         <button
           class="nav-hamburger"
           :class="{ open: menuOpen }"
-          @click="toggleMenu"
           :aria-expanded="menuOpen"
           aria-controls="menu-mobile"
           :aria-label="menuOpen ? 'Cerrar menú' : 'Abrir menú'"
+          @click="toggleMenu"
         >
           <span /><span /><span />
         </button>
@@ -56,9 +78,16 @@
 
     <!-- Menú mobile -->
     <Transition name="menu">
-      <div v-if="menuOpen" id="menu-mobile" class="nav-mobile-menu">
+      <div
+        v-if="menuOpen"
+        id="menu-mobile"
+        class="nav-mobile-menu"
+      >
         <ul role="list">
-          <li v-for="(item, i) in navItems" :key="item.id">
+          <li
+            v-for="(item, i) in navItems"
+            :key="item.id"
+          >
             <a
               :href="`#${item.id}`"
               class="nav-mobile-link"
@@ -70,7 +99,11 @@
             </a>
           </li>
         </ul>
-        <a href="#contacto" class="btn btn-primary nav-mobile-cta" @click.prevent="mobileNav('contacto')">
+        <a
+          href="#contacto"
+          class="btn btn-primary nav-mobile-cta"
+          @click.prevent="mobileNav('contacto')"
+        >
           Hablemos →
         </a>
       </div>
@@ -80,16 +113,16 @@
 
 <script setup lang="ts">
 const navItems = [
-  { id: 'nosotros',  label: 'Nosotros' },
-  { id: 'servicios', label: 'Servicios' },
+  { id: 'nosotros', label: 'Nosotros' },
   { id: 'portfolio', label: 'Portfolio' },
-  { id: 'contacto',  label: 'Contacto' },
+  { id: 'servicios', label: 'Servicios' },
+  { id: 'contacto', label: 'Contacto' }
 ]
 
-const isScrolled    = ref(false)
-const menuOpen      = ref(false)
+const isScrolled = ref(false)
+const menuOpen = ref(false)
 const activeSection = ref('inicio')
-let observers: IntersectionObserver[] = []
+const observers: IntersectionObserver[] = []
 
 function scrollTo(id: string) {
   const el = document.getElementById(id)
@@ -120,7 +153,7 @@ function onScroll() {
   isScrolled.value = window.scrollY > 40
 }
 
-watch(menuOpen, open => {
+watch(menuOpen, (open) => {
   document.body.style.overflow = open ? 'hidden' : ''
 })
 
@@ -129,8 +162,8 @@ onMounted(() => {
   window.addEventListener('keydown', onKeydown)
 
   // Active section con IntersectionObserver
-  const sections = ['inicio', 'nosotros', 'servicios', 'portfolio', 'contacto']
-  sections.forEach(id => {
+  const sections = ['inicio', 'reel', 'nosotros', 'portfolio', 'servicios', 'contacto']
+  sections.forEach((id) => {
     const el = document.getElementById(id)
     if (!el) return
     const obs = new IntersectionObserver(
@@ -142,7 +175,6 @@ onMounted(() => {
     obs.observe(el)
     observers.push(obs)
   })
-
 })
 
 onUnmounted(() => {
@@ -158,6 +190,7 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   gap: 2rem;
+  min-height: 4rem;
 }
 
 /* Logo */
@@ -166,6 +199,7 @@ onUnmounted(() => {
   margin-right: auto;
   display: flex;
   align-items: center;
+  min-height: 44px;
 }
 .nav-logo-svg { --logo-height: 1.75rem; }
 /* Cuando el menú mobile está abierto, logo en blanco sobre el azul */

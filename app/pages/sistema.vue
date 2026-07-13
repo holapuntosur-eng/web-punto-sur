@@ -3,9 +3,17 @@
     <!-- ─── Sidebar nav ─── -->
     <aside class="ds-sidebar">
       <div class="ds-sidebar-inner">
-        <a href="/" class="ds-logo">Punto Sur<span class="ds-logo-dot">.</span></a>
-        <p class="ds-sidebar-label">Design System</p>
-        <nav class="ds-nav" aria-label="Secciones del sistema">
+        <a
+          href="/"
+          class="ds-logo"
+        >Punto Sur<span class="ds-logo-dot">.</span></a>
+        <p class="ds-sidebar-label">
+          Design System
+        </p>
+        <nav
+          class="ds-nav"
+          aria-label="Secciones del sistema"
+        >
           <a
             v-for="s in sections"
             :key="s.id"
@@ -17,17 +25,21 @@
             <span class="ds-nav-num">{{ s.num }}</span>{{ s.label }}
           </a>
         </nav>
-        <a href="/" class="ds-back">← Volver al sitio</a>
+        <a
+          href="/"
+          class="ds-back"
+        >← Volver al sitio</a>
       </div>
     </aside>
 
     <!-- ─── Contenido ─── -->
     <main class="ds-main">
-
       <!-- Header -->
       <header class="ds-header">
         <span class="ds-eyebrow">Living Style Guide · v1.0</span>
-        <h1 class="ds-title">Sistema de diseño</h1>
+        <h1 class="ds-title">
+          Sistema de diseño
+        </h1>
         <p class="ds-intro">
           Arquitectura de tokens en tres capas — <strong>primitivos → semánticos → componentes</strong>.
           Modern Corporate: autoridad profesional con atmósfera cálida y aireada.
@@ -58,15 +70,28 @@
       </header>
 
       <!-- 01 · Colores -->
-      <section id="colores" class="ds-section">
+      <section
+        id="colores"
+        class="ds-section"
+      >
         <div class="ds-section-head">
           <span class="ds-section-num">01</span>
-          <h2 class="ds-section-title">Color</h2>
+          <h2 class="ds-section-title">
+            Color
+          </h2>
         </div>
 
-        <h3 class="ds-sub">Capa 1 · Primitivos</h3>
-        <div v-for="ramp in colorRamps" :key="ramp.name" class="ds-ramp">
-          <p class="ds-ramp-name">{{ ramp.name }}</p>
+        <h3 class="ds-sub">
+          Capa 1 · Primitivos
+        </h3>
+        <div
+          v-for="ramp in colorRamps"
+          :key="ramp.name"
+          class="ds-ramp"
+        >
+          <p class="ds-ramp-name">
+            {{ ramp.name }}
+          </p>
           <div class="ds-ramp-swatches">
             <button
               v-for="step in steps"
@@ -74,24 +99,29 @@
               class="ds-swatch"
               :style="{ background: `var(--color-${ramp.token}-${step})` }"
               :class="{ 'is-light': step <= 300 }"
-              @click="copy(`--color-${ramp.token}-${step}`)"
               :title="`Copiar --color-${ramp.token}-${step}`"
+              @click="copy(`--color-${ramp.token}-${step}`)"
             >
               <span class="ds-swatch-step">{{ step }}</span>
             </button>
           </div>
         </div>
 
-        <h3 class="ds-sub ds-sub-spaced">Capa 2 · Semánticos</h3>
+        <h3 class="ds-sub ds-sub-spaced">
+          Capa 2 · Semánticos
+        </h3>
         <div class="ds-semantic-grid">
           <button
             v-for="t in semanticColors"
             :key="t.token"
             class="ds-semantic"
-            @click="copy(t.token)"
             :title="`Copiar ${t.token}`"
+            @click="copy(t.token)"
           >
-            <span class="ds-semantic-chip" :style="{ background: `var(${t.token})`, borderColor: t.border ? 'var(--color-outline-variant)' : 'transparent' }" />
+            <span
+              class="ds-semantic-chip"
+              :style="{ background: `var(${t.token})`, borderColor: t.border ? 'var(--color-outline-variant)' : 'transparent' }"
+            />
             <span class="ds-semantic-info">
               <code>{{ t.token }}</code>
               <small>{{ t.use }}</small>
@@ -101,18 +131,32 @@
       </section>
 
       <!-- 02 · Tipografía -->
-      <section id="tipografia" class="ds-section">
+      <section
+        id="tipografia"
+        class="ds-section"
+      >
         <div class="ds-section-head">
           <span class="ds-section-num">02</span>
-          <h2 class="ds-section-title">Tipografía</h2>
+          <h2 class="ds-section-title">
+            Tipografía
+          </h2>
         </div>
         <p class="ds-section-desc">
           <strong>Montserrat</strong> en exclusiva. Headlines en pesos 700-800 con tracking negativo.
           Body en 400. Labels en 600 uppercase con tracking positivo.
         </p>
         <div class="ds-type-list">
-          <div v-for="t in typeScale" :key="t.class" class="ds-type-row">
-            <div class="ds-type-sample" :class="t.class">{{ t.sample }}</div>
+          <div
+            v-for="t in typeScale"
+            :key="t.class"
+            class="ds-type-row"
+          >
+            <div
+              class="ds-type-sample"
+              :class="t.class"
+            >
+              {{ t.sample }}
+            </div>
             <div class="ds-type-meta">
               <code>.{{ t.class }}</code>
               <small>{{ t.spec }}</small>
@@ -122,26 +166,51 @@
       </section>
 
       <!-- 03 · Espaciado y radios -->
-      <section id="espaciado" class="ds-section">
+      <section
+        id="espaciado"
+        class="ds-section"
+      >
         <div class="ds-section-head">
           <span class="ds-section-num">03</span>
-          <h2 class="ds-section-title">Espaciado &amp; Radios</h2>
+          <h2 class="ds-section-title">
+            Espaciado &amp; Radios
+          </h2>
         </div>
-        <p class="ds-section-desc">Escala base de 8px. Filosofía pill-shaped: radios generosos que humanizan la interfaz.</p>
+        <p class="ds-section-desc">
+          Escala base de 8px. Filosofía pill-shaped: radios generosos que humanizan la interfaz.
+        </p>
 
-        <h3 class="ds-sub">Escala de espaciado (8px)</h3>
+        <h3 class="ds-sub">
+          Escala de espaciado (8px)
+        </h3>
         <div class="ds-space-list">
-          <div v-for="s in spacing" :key="s.val" class="ds-space-row">
+          <div
+            v-for="s in spacing"
+            :key="s.val"
+            class="ds-space-row"
+          >
             <span class="ds-space-label">{{ s.val }}</span>
-            <div class="ds-space-bar" :style="{ width: s.px }" />
+            <div
+              class="ds-space-bar"
+              :style="{ width: s.px }"
+            />
             <span class="ds-space-px">{{ s.px }}</span>
           </div>
         </div>
 
-        <h3 class="ds-sub ds-sub-spaced">Radios</h3>
+        <h3 class="ds-sub ds-sub-spaced">
+          Radios
+        </h3>
         <div class="ds-radius-grid">
-          <div v-for="r in radii" :key="r.token" class="ds-radius-item">
-            <div class="ds-radius-box" :style="{ borderRadius: `var(${r.token})` }" />
+          <div
+            v-for="r in radii"
+            :key="r.token"
+            class="ds-radius-item"
+          >
+            <div
+              class="ds-radius-box"
+              :style="{ borderRadius: `var(${r.token})` }"
+            />
             <code>{{ r.token }}</code>
             <small>{{ r.val }}</small>
           </div>
@@ -149,38 +218,74 @@
       </section>
 
       <!-- 04 · Elevación -->
-      <section id="elevacion" class="ds-section">
+      <section
+        id="elevacion"
+        class="ds-section"
+      >
         <div class="ds-section-head">
           <span class="ds-section-num">04</span>
-          <h2 class="ds-section-title">Elevación</h2>
+          <h2 class="ds-section-title">
+            Elevación
+          </h2>
         </div>
-        <p class="ds-section-desc">Sombras extra-difusas con tinte azul (nunca grises sucios). Blur amplio, baja opacidad.</p>
+        <p class="ds-section-desc">
+          Sombras extra-difusas con tinte azul (nunca grises sucios). Blur amplio, baja opacidad.
+        </p>
         <div class="ds-shadow-grid">
-          <div v-for="sh in shadows" :key="sh.token" class="ds-shadow-item">
-            <div class="ds-shadow-box" :style="{ boxShadow: `var(${sh.token})` }" />
+          <div
+            v-for="sh in shadows"
+            :key="sh.token"
+            class="ds-shadow-item"
+          >
+            <div
+              class="ds-shadow-box"
+              :style="{ boxShadow: `var(${sh.token})` }"
+            />
             <code>{{ sh.token }}</code>
           </div>
         </div>
       </section>
 
       <!-- 05 · Componentes -->
-      <section id="componentes" class="ds-section">
+      <section
+        id="componentes"
+        class="ds-section"
+      >
         <div class="ds-section-head">
           <span class="ds-section-num">05</span>
-          <h2 class="ds-section-title">Componentes</h2>
+          <h2 class="ds-section-title">
+            Componentes
+          </h2>
         </div>
 
         <!-- Botones -->
-        <h3 class="ds-sub">Botones</h3>
+        <h3 class="ds-sub">
+          Botones
+        </h3>
         <div class="ds-component-demo">
           <button class="btn btn-primary">
             Primary
             <span class="btn-arrow">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 12 12"
+                fill="none"
+              ><path
+                d="M2 10L10 2M10 2H4M10 2V8"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              /></svg>
             </span>
           </button>
-          <button class="btn btn-secondary">Secondary</button>
-          <button class="btn btn-ghost">Ghost</button>
+          <button class="btn btn-secondary">
+            Secondary
+          </button>
+          <button class="btn btn-ghost">
+            Ghost
+          </button>
         </div>
         <table class="ds-spec-table">
           <thead>
@@ -195,21 +300,31 @@
         </table>
 
         <!-- Cards -->
-        <h3 class="ds-sub ds-sub-spaced">Cards</h3>
+        <h3 class="ds-sub ds-sub-spaced">
+          Cards
+        </h3>
         <div class="ds-card-demo">
           <article class="card ds-card-sample">
             <div class="ds-card-media" />
             <div class="ds-card-body">
               <span class="chip">Branding</span>
-              <h4 class="ds-card-title">Card por defecto</h4>
-              <p class="ds-card-text">Radio 2xl, sombra ambiental suave, hover elevado. Sin bordes — separación tonal.</p>
+              <h4 class="ds-card-title">
+                Card por defecto
+              </h4>
+              <p class="ds-card-text">
+                Radio 2xl, sombra ambiental suave, hover elevado. Sin bordes — separación tonal.
+              </p>
             </div>
           </article>
           <article class="card card-celeste ds-card-sample">
             <div class="ds-card-body">
               <span class="chip">Variante</span>
-              <h4 class="ds-card-title">Card celeste</h4>
-              <p class="ds-card-text">Fondo celeste al 20% para separación tonal en superficies claras.</p>
+              <h4 class="ds-card-title">
+                Card celeste
+              </h4>
+              <p class="ds-card-text">
+                Fondo celeste al 20% para separación tonal en superficies claras.
+              </p>
             </div>
           </article>
         </div>
@@ -217,7 +332,9 @@
         <!-- Chips e inputs -->
         <div class="ds-two-col">
           <div>
-            <h3 class="ds-sub ds-sub-spaced">Chips &amp; Tags</h3>
+            <h3 class="ds-sub ds-sub-spaced">
+              Chips &amp; Tags
+            </h3>
             <div class="ds-component-demo">
               <span class="chip">Audiovisual</span>
               <span class="chip">UX/UI</span>
@@ -225,33 +342,61 @@
             </div>
           </div>
           <div>
-            <h3 class="ds-sub ds-sub-spaced">Inputs</h3>
+            <h3 class="ds-sub ds-sub-spaced">
+              Inputs
+            </h3>
             <div class="ds-input-demo">
-              <input class="input-ps" type="text" placeholder="Tu nombre" />
-              <input class="input-ps" type="email" placeholder="tu@email.com" />
+              <input
+                class="input-ps"
+                type="text"
+                placeholder="Tu nombre"
+              >
+              <input
+                class="input-ps"
+                type="email"
+                placeholder="tu@email.com"
+              >
             </div>
           </div>
         </div>
       </section>
 
       <!-- 06 · Movimiento -->
-      <section id="movimiento" class="ds-section">
+      <section
+        id="movimiento"
+        class="ds-section"
+      >
         <div class="ds-section-head">
           <span class="ds-section-num">06</span>
-          <h2 class="ds-section-title">Movimiento</h2>
+          <h2 class="ds-section-title">
+            Movimiento
+          </h2>
         </div>
-        <p class="ds-section-desc">Curvas de easing y duraciones. Pasá el mouse sobre cada caja para ver la curva aplicada.</p>
+        <p class="ds-section-desc">
+          Curvas de easing y duraciones. Pasá el mouse sobre cada caja para ver la curva aplicada.
+        </p>
         <div class="ds-motion-grid">
-          <div v-for="m in motion" :key="m.token" class="ds-motion-item">
+          <div
+            v-for="m in motion"
+            :key="m.token"
+            class="ds-motion-item"
+          >
             <div class="ds-motion-track">
-              <div class="ds-motion-dot" :style="{ transition: `transform var(--duration-base) var(${m.token})` }" />
+              <div
+                class="ds-motion-dot"
+                :style="{ transition: `transform var(--duration-base) var(${m.token})` }"
+              />
             </div>
             <code>{{ m.token }}</code>
             <small>{{ m.val }}</small>
           </div>
         </div>
         <div class="ds-duration-list">
-          <span v-for="d in durations" :key="d.token" class="chip">{{ d.token }} · {{ d.val }}</span>
+          <span
+            v-for="d in durations"
+            :key="d.token"
+            class="chip"
+          >{{ d.token }} · {{ d.val }}</span>
         </div>
       </section>
 
@@ -262,7 +407,12 @@
 
     <!-- Toast de copiado -->
     <Transition name="toast">
-      <div v-if="toast" class="ds-toast">{{ toast }}</div>
+      <div
+        v-if="toast"
+        class="ds-toast"
+      >
+        {{ toast }}
+      </div>
     </Transition>
   </div>
 </template>
@@ -273,49 +423,49 @@ useHead({ title: 'Sistema de diseño — Punto Sur' })
 const year = new Date().getFullYear()
 
 const sections = [
-  { id: 'colores',     num: '01', label: 'Color' },
-  { id: 'tipografia',  num: '02', label: 'Tipografía' },
-  { id: 'espaciado',   num: '03', label: 'Espaciado' },
-  { id: 'elevacion',   num: '04', label: 'Elevación' },
+  { id: 'colores', num: '01', label: 'Color' },
+  { id: 'tipografia', num: '02', label: 'Tipografía' },
+  { id: 'espaciado', num: '03', label: 'Espaciado' },
+  { id: 'elevacion', num: '04', label: 'Elevación' },
   { id: 'componentes', num: '05', label: 'Componentes' },
-  { id: 'movimiento',  num: '06', label: 'Movimiento' },
+  { id: 'movimiento', num: '06', label: 'Movimiento' }
 ]
 
 const steps = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
 
 const colorRamps = [
-  { name: 'Azul · primario',     token: 'azul' },
+  { name: 'Azul · primario', token: 'azul' },
   { name: 'Amarillo · secundario', token: 'amarillo' },
   { name: 'Celeste · terciario', token: 'celeste' },
-  { name: 'Neutral',             token: 'neutral' },
+  { name: 'Neutral', token: 'neutral' }
 ]
 
 const semanticColors = [
-  { token: '--color-primary',         use: 'Acciones, headlines' },
-  { token: '--color-secondary',       use: 'CTA cálido, acentos' },
-  { token: '--color-tertiary',        use: 'Fondos suaves, chips' },
-  { token: '--color-accent',          use: 'Detalles, puntuación' },
-  { token: '--color-background',      use: 'Fondo de página', border: true },
-  { token: '--color-surface',         use: 'Cards, superficies', border: true },
-  { token: '--color-on-surface',      use: 'Texto principal' },
+  { token: '--color-primary', use: 'Acciones, headlines' },
+  { token: '--color-secondary', use: 'CTA cálido, acentos' },
+  { token: '--color-tertiary', use: 'Fondos suaves, chips' },
+  { token: '--color-accent', use: 'Detalles, puntuación' },
+  { token: '--color-background', use: 'Fondo de página', border: true },
+  { token: '--color-surface', use: 'Cards, superficies', border: true },
+  { token: '--color-on-surface', use: 'Texto principal' },
   { token: '--color-on-surface-variant', use: 'Texto secundario' },
-  { token: '--color-outline-variant', use: 'Bordes, divisores', border: true },
+  { token: '--color-outline-variant', use: 'Bordes, divisores', border: true }
 ]
 
 const typeScale = [
   { class: 'text-display', sample: 'Display', spec: 'clamp 3.5–7rem · 800 · -0.03em' },
-  { class: 'text-h1',      sample: 'Headline 1', spec: 'clamp 2.5–4.5rem · 700 · -0.025em' },
-  { class: 'text-h2',      sample: 'Headline 2', spec: 'clamp 2–3rem · 700 · -0.02em' },
-  { class: 'text-h3',      sample: 'Headline 3', spec: 'clamp 1.5–2rem · 600 · -0.01em' },
+  { class: 'text-h1', sample: 'Headline 1', spec: 'clamp 2.5–4.5rem · 700 · -0.025em' },
+  { class: 'text-h2', sample: 'Headline 2', spec: 'clamp 2–3rem · 700 · -0.02em' },
+  { class: 'text-h3', sample: 'Headline 3', spec: 'clamp 1.5–2rem · 600 · -0.01em' },
   { class: 'text-body-lg', sample: 'Body large — texto de lectura cómoda para intros.', spec: '1.125rem · 400 · 1.65' },
   { class: 'text-body-md', sample: 'Body medium — el cuerpo de texto estándar del sitio.', spec: '1rem · 400 · 1.6' },
-  { class: 'text-eyebrow', sample: 'Eyebrow / Label', spec: '0.75rem · 600 · 0.1em · uppercase' },
+  { class: 'text-eyebrow', sample: 'Eyebrow / Label', spec: '0.75rem · 600 · 0.1em · uppercase' }
 ]
 
 const spacing = [
   { val: '1', px: '8px' }, { val: '2', px: '16px' }, { val: '3', px: '24px' },
   { val: '4', px: '32px' }, { val: '5', px: '40px' }, { val: '6', px: '48px' },
-  { val: '8', px: '64px' }, { val: '10', px: '80px' }, { val: '12', px: '96px' },
+  { val: '8', px: '64px' }, { val: '10', px: '80px' }, { val: '12', px: '96px' }
 ]
 
 const radii = [
@@ -324,24 +474,24 @@ const radii = [
   { token: '--radius-lg', val: '1.5rem' },
   { token: '--radius-xl', val: '2rem' },
   { token: '--radius-2xl', val: '3rem' },
-  { token: '--radius-full', val: 'pill' },
+  { token: '--radius-full', val: 'pill' }
 ]
 
 const shadows = [
   { token: '--shadow-sm' }, { token: '--shadow-md' },
-  { token: '--shadow-lg' }, { token: '--shadow-xl' },
+  { token: '--shadow-lg' }, { token: '--shadow-xl' }
 ]
 
 const motion = [
-  { token: '--ease-expo',  val: 'cubic-bezier(.19,1,.22,1)' },
-  { token: '--ease-inout', val: 'cubic-bezier(.76,0,.24,1)' },
+  { token: '--ease-expo', val: 'cubic-bezier(.19,1,.22,1)' },
+  { token: '--ease-inout', val: 'cubic-bezier(.76,0,.24,1)' }
 ]
 
 const durations = [
   { token: '--duration-fast', val: '200ms' },
   { token: '--duration-base', val: '400ms' },
   { token: '--duration-slow', val: '700ms' },
-  { token: '--duration-xslow', val: '1100ms' },
+  { token: '--duration-xslow', val: '1100ms' }
 ]
 
 const activeSection = ref('colores')
@@ -357,16 +507,20 @@ async function copy(token: string) {
   try {
     await navigator.clipboard.writeText(`var(${token})`)
     toast.value = `Copiado: var(${token})`
-    setTimeout(() => { toast.value = '' }, 1800)
+    setTimeout(() => {
+      toast.value = ''
+    }, 1800)
   } catch {
     toast.value = token
-    setTimeout(() => { toast.value = '' }, 1800)
+    setTimeout(() => {
+      toast.value = ''
+    }, 1800)
   }
 }
 
-let observers: IntersectionObserver[] = []
+const observers: IntersectionObserver[] = []
 onMounted(() => {
-  sections.forEach(s => {
+  sections.forEach((s) => {
     const el = document.getElementById(s.id)
     if (!el) return
     const obs = new IntersectionObserver(

@@ -1,9 +1,16 @@
 <template>
-  <footer class="site-footer" aria-label="Pie de página">
+  <footer
+    class="site-footer"
+    aria-label="Pie de página"
+  >
     <div class="container-ps">
       <div class="footer-top">
         <div class="footer-brand">
-          <a href="#inicio" class="footer-logo" aria-label="Punto Sur — inicio">
+          <a
+            href="#inicio"
+            class="footer-logo"
+            aria-label="Punto Sur — inicio"
+          >
             <UiPsLogo class="footer-logo-svg" />
           </a>
           <p class="footer-tagline text-body-sm">
@@ -11,10 +18,20 @@
           </p>
         </div>
 
-        <nav class="footer-nav" aria-label="Navegación footer">
+        <nav
+          class="footer-nav"
+          aria-label="Navegación footer"
+        >
           <ul role="list">
-            <li v-for="item in navItems" :key="item.id">
-              <a :href="`#${item.id}`" class="footer-link link-ps" @click.prevent="scrollTo(item.id)">
+            <li
+              v-for="item in navItems"
+              :key="item.id"
+            >
+              <a
+                :href="`#${item.id}`"
+                class="footer-link link-ps"
+                @click.prevent="scrollTo(item.id)"
+              >
                 {{ item.label }}
               </a>
             </li>
@@ -22,8 +39,16 @@
         </nav>
 
         <div class="footer-contact">
-          <a href="mailto:hola.puntosur@gmail.com" class="footer-link link-ps">hola.puntosur@gmail.com</a>
-          <a href="https://instagram.com/somos_puntosur" target="_blank" rel="noopener" class="footer-link link-ps">@somos_puntosur</a>
+          <a
+            href="mailto:hola.puntosur@gmail.com"
+            class="footer-link link-ps"
+          >hola.puntosur@gmail.com</a>
+          <a
+            href="https://instagram.com/somos_puntosur"
+            target="_blank"
+            rel="noopener"
+            class="footer-link link-ps"
+          >@somos_puntosur</a>
         </div>
       </div>
 
@@ -43,10 +68,10 @@
 const year = new Date().getFullYear()
 
 const navItems = [
-  { id: 'nosotros',  label: 'Nosotros' },
+  { id: 'nosotros', label: 'Nosotros' },
   { id: 'servicios', label: 'Servicios' },
   { id: 'portfolio', label: 'Portfolio' },
-  { id: 'contacto',  label: 'Contacto' },
+  { id: 'contacto', label: 'Contacto' }
 ]
 
 function scrollTo(id: string) {

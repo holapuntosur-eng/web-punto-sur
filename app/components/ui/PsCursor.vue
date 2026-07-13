@@ -58,8 +58,12 @@ onMounted(() => {
   circleY.value = mouseY.value
 
   window.addEventListener('mousemove', onMouseMove, { passive: true })
-  window.addEventListener('mousedown', () => { isClicking.value = true })
-  window.addEventListener('mouseup', () => { isClicking.value = false })
+  window.addEventListener('mousedown', () => {
+    isClicking.value = true
+  })
+  window.addEventListener('mouseup', () => {
+    isClicking.value = false
+  })
 
   // Detectar hover sobre interactivos
   document.addEventListener('mouseover', onMouseOver)

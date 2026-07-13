@@ -18,11 +18,15 @@ useSeoMeta({
 })
 
 useScrollReveal()
+useParallax()
 </script>
 
 <template>
   <UApp>
-    <a href="#contenido" class="skip-link">Saltar al contenido</a>
+    <a
+      href="#contenido"
+      class="skip-link"
+    >Saltar al contenido</a>
     <UiPsCursor />
     <NuxtPage />
   </UApp>

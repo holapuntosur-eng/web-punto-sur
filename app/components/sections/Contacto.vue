@@ -1,7 +1,10 @@
 <template>
-  <section id="contacto" class="section-contacto" aria-label="Contacto">
+  <section
+    id="contacto"
+    class="section-contacto"
+    aria-label="Contacto"
+  >
     <div class="container-ps">
-
       <!-- Headline -->
       <div class="contacto-headline">
         <h2 class="contacto-title">
@@ -15,10 +18,16 @@
       <div class="contacto-grid">
         <!-- Formulario -->
         <div class="contacto-form-wrap reveal">
-          <form class="contacto-form" @submit.prevent="submitForm">
+          <form
+            class="contacto-form"
+            @submit.prevent="submitForm"
+          >
             <div class="form-row">
               <div class="form-group">
-                <label for="nombre" class="form-label">Nombre</label>
+                <label
+                  for="nombre"
+                  class="form-label"
+                >Nombre</label>
                 <input
                   id="nombre"
                   v-model="form.nombre"
@@ -27,10 +36,13 @@
                   placeholder="Tu nombre"
                   required
                   autocomplete="name"
-                />
+                >
               </div>
               <div class="form-group">
-                <label for="email" class="form-label">Email</label>
+                <label
+                  for="email"
+                  class="form-label"
+                >Email</label>
                 <input
                   id="email"
                   v-model="form.email"
@@ -39,21 +51,27 @@
                   placeholder="tu@email.com"
                   required
                   autocomplete="email"
-                />
+                >
               </div>
             </div>
             <div class="form-group">
-              <label for="marca" class="form-label">¿De qué se trata tu proyecto?</label>
+              <label
+                for="marca"
+                class="form-label"
+              >¿De qué se trata tu proyecto?</label>
               <input
                 id="marca"
                 v-model="form.marca"
                 type="text"
                 class="input-ps"
                 placeholder="Tu marca o proyecto"
-              />
+              >
             </div>
             <div class="form-group">
-              <label for="mensaje" class="form-label">Mensaje</label>
+              <label
+                for="mensaje"
+                class="form-label"
+              >Mensaje</label>
               <textarea
                 id="mensaje"
                 v-model="form.mensaje"
@@ -63,18 +81,42 @@
                 required
               />
             </div>
-            <button type="submit" class="btn btn-primary form-submit" :disabled="enviando">
+            <button
+              type="submit"
+              class="btn btn-primary form-submit"
+              :disabled="enviando"
+            >
               <span v-if="!enviando">Enviar mensaje</span>
               <span v-else>Preparando email...</span>
-              <span class="btn-arrow" v-if="!enviando">
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                  <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <span
+                v-if="!enviando"
+                class="btn-arrow"
+              >
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M2 10L10 2M10 2H4M10 2V8"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
                 </svg>
               </span>
             </button>
 
             <Transition name="fade">
-              <p v-if="enviado" class="form-success" role="status" aria-live="polite">
+              <p
+                v-if="enviado"
+                class="form-success"
+                role="status"
+                aria-live="polite"
+              >
                 Se abrió tu aplicación de correo con el mensaje preparado.
               </p>
             </Transition>
@@ -84,21 +126,39 @@
         <!-- Info -->
         <div class="contacto-info reveal reveal-delay-2">
           <div class="contacto-info-block">
-            <p class="text-eyebrow contacto-info-label">Email</p>
-            <a href="mailto:hola.puntosur@gmail.com" class="contacto-info-val link-ps">
+            <p class="text-eyebrow contacto-info-label">
+              Email
+            </p>
+            <a
+              href="mailto:hola.puntosur@gmail.com"
+              class="contacto-info-val link-ps"
+            >
               hola.puntosur@gmail.com
             </a>
           </div>
           <div class="contacto-info-block">
-            <p class="text-eyebrow contacto-info-label">Instagram</p>
-            <a href="https://instagram.com/somos_puntosur" target="_blank" rel="noopener" class="contacto-info-val link-ps">
+            <p class="text-eyebrow contacto-info-label">
+              Instagram
+            </p>
+            <a
+              href="https://instagram.com/somos_puntosur"
+              target="_blank"
+              rel="noopener"
+              class="contacto-info-val link-ps"
+            >
               @somos_puntosur
             </a>
           </div>
           <div class="contacto-info-block">
-            <p class="text-eyebrow contacto-info-label">Ubicación</p>
-            <p class="contacto-info-val">Mar del Plata, Argentina</p>
-            <p class="contacto-info-sub text-body-sm">Alcance global</p>
+            <p class="text-eyebrow contacto-info-label">
+              Ubicación
+            </p>
+            <p class="contacto-info-val">
+              Mar del Plata, Argentina
+            </p>
+            <p class="contacto-info-sub text-body-sm">
+              Alcance global
+            </p>
           </div>
         </div>
       </div>
@@ -109,7 +169,7 @@
 <script setup lang="ts">
 const form = reactive({ nombre: '', email: '', marca: '', mensaje: '' })
 const enviando = ref(false)
-const enviado  = ref(false)
+const enviado = ref(false)
 
 async function submitForm() {
   enviando.value = true
@@ -125,15 +185,21 @@ async function submitForm() {
   window.location.href = `mailto:hola.puntosur@gmail.com?subject=${subject}&body=${body}`
   await new Promise(resolve => setTimeout(resolve, 300))
   enviando.value = false
-  enviado.value  = true
-  setTimeout(() => { enviado.value = false }, 5000)
+  enviado.value = true
+  setTimeout(() => {
+    enviado.value = false
+  }, 5000)
 }
 </script>
 
 <style scoped>
 .section-contacto {
   padding-block: clamp(5rem, 10vw, 9rem);
-  background: var(--color-surface);
+  background:
+    radial-gradient(circle at 14% 18%, color-mix(in srgb, var(--color-celeste-100) 44%, transparent), transparent 22rem),
+    linear-gradient(180deg, var(--color-surface), var(--color-background));
+  position: relative;
+  overflow: hidden;
 }
 
 /* Headline */
@@ -141,33 +207,53 @@ async function submitForm() {
   margin-bottom: clamp(3rem, 7vw, 6rem);
 }
 .contacto-title {
-  font-size: clamp(3rem, 7vw, 6rem);
-  font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.035em;
+  font-size: clamp(3rem, 7.4vw, 7rem);
+  font-weight: 500;
+  line-height: 0.96;
+  letter-spacing: -0.055em;
   color: var(--color-azul-900);
   margin: 0;
   display: flex;
   flex-direction: column;
 }
 .contacto-title-line2 { padding-left: clamp(2rem, 8vw, 8rem); }
-.accent-q { color: var(--color-amarillo-500); }
+.accent-q { color: inherit; }
 
 /* Grid */
 .contacto-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 3rem;
+  align-items: start;
 }
 @media (min-width: 768px) {
-  .contacto-grid { grid-template-columns: 1.4fr 1fr; gap: 5rem; align-items: start; }
+  .contacto-grid { grid-template-columns: 1.35fr 0.9fr; gap: clamp(3rem, 7vw, 6rem); }
+}
+
+.contacto-form-wrap {
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid color-mix(in srgb, var(--color-azul-900) 8%, transparent);
+  border-radius: clamp(1.75rem, 4vw, 3rem);
+  background: rgba(255,255,255,0.72);
+  box-shadow: 0 1.5rem 4.5rem rgba(0, 33, 60, 0.08);
+  backdrop-filter: blur(14px);
+  transition:
+    border-color var(--duration-base) ease,
+    box-shadow var(--duration-base) var(--ease-expo),
+    transform var(--duration-base) var(--ease-expo);
+}
+
+.contacto-form-wrap:focus-within {
+  border-color: color-mix(in srgb, var(--color-azul-700) 30%, transparent);
+  box-shadow: 0 2rem 5.5rem rgba(0, 33, 60, 0.12);
+  transform: translateY(-4px);
 }
 
 /* Formulario */
 .contacto-form {
   display: flex;
   flex-direction: column;
-  gap: 1.125rem;
+  gap: 1rem;
 }
 .form-row {
   display: grid;
@@ -179,10 +265,11 @@ async function submitForm() {
 }
 .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
 .form-label {
-  font-size: 0.8125rem;
-  font-weight: 600;
+  font-size: 0.75rem;
+  font-weight: 700;
   color: var(--color-on-surface-variant);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .form-submit {
@@ -207,16 +294,32 @@ async function submitForm() {
 .contacto-info {
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
-  padding-top: 0.5rem;
+  gap: 0.85rem;
+  padding-top: 0;
 }
-.contacto-info-block { display: flex; flex-direction: column; gap: 0.4rem; }
+.contacto-info-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  border: 1px solid color-mix(in srgb, var(--color-azul-900) 8%, transparent);
+  border-radius: clamp(1.35rem, 3vw, 2rem);
+  background: rgba(255,255,255,0.58);
+  transition:
+    background var(--duration-base) ease,
+    transform var(--duration-base) var(--ease-expo);
+}
+.contacto-info-block:hover {
+  background: rgba(255,255,255,0.8);
+  transform: translateY(-4px);
+}
 .contacto-info-label { margin: 0; }
 .contacto-info-val {
-  font-size: 1.0625rem;
+  font-size: clamp(1rem, 1.8vw, 1.28rem);
   font-weight: 600;
   color: var(--color-azul-900);
   text-decoration: none;
+  letter-spacing: -0.03em;
 }
 a.contacto-info-val:hover { color: var(--color-azul-600); }
 .contacto-info-sub { color: var(--color-on-surface-variant); margin: 0; }
