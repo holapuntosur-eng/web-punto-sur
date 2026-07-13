@@ -87,7 +87,7 @@
               :disabled="enviando"
             >
               <span v-if="!enviando">Enviar mensaje</span>
-              <span v-else>Preparando email...</span>
+              <span v-else>Enviando...</span>
               <span
                 v-if="!enviando"
                 class="btn-arrow"
@@ -117,7 +117,17 @@
                 role="status"
                 aria-live="polite"
               >
-                Se abrió tu aplicación de correo con el mensaje preparado.
+                Mensaje enviado. Te respondemos muy pronto.
+              </p>
+            </Transition>
+
+            <Transition name="fade">
+              <p
+                v-if="error"
+                class="form-error"
+                role="alert"
+              >
+                No pudimos enviar el mensaje. Probá nuevamente o escribinos por email.
               </p>
             </Transition>
           </form>
@@ -167,28 +177,49 @@
 </template>
 
 <script setup lang="ts">
+const formEndpoint = 'https://formspree.io/f/mbdnjqvr'
 const form = reactive({ nombre: '', email: '', marca: '', mensaje: '' })
 const enviando = ref(false)
 const enviado = ref(false)
+const error = ref(false)
 
 async function submitForm() {
   enviando.value = true
-  const subject = encodeURIComponent(`Consulta de ${form.nombre}${form.marca ? ` — ${form.marca}` : ''}`)
-  const body = encodeURIComponent([
-    `Nombre: ${form.nombre}`,
-    `Email: ${form.email}`,
-    form.marca ? `Proyecto: ${form.marca}` : '',
-    '',
-    form.mensaje
-  ].filter(Boolean).join('\n'))
+  enviado.value = false
+  error.value = false
 
-  window.location.href = `mailto:hola.puntosur@gmail.com?subject=${subject}&body=${body}`
-  await new Promise(resolve => setTimeout(resolve, 300))
-  enviando.value = false
-  enviado.value = true
-  setTimeout(() => {
-    enviado.value = false
-  }, 5000)
+  try {
+    const response = await fetch(formEndpoint, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        nombre: form.nombre,
+        email: form.email,
+        proyecto: form.marca,
+        mensaje: form.mensaje
+      })
+    })
+
+    if (!response.ok) {
+      throw new Error('Formspree request failed')
+    }
+
+    form.nombre = ''
+    form.email = ''
+    form.marca = ''
+    form.mensaje = ''
+    enviado.value = true
+    setTimeout(() => {
+      enviado.value = false
+    }, 5000)
+  } catch {
+    error.value = true
+  } finally {
+    enviando.value = false
+  }
 }
 </script>
 
@@ -285,6 +316,16 @@ async function submitForm() {
   font-weight: 600;
   color: #16a34a;
   background: #f0fdf4;
+  padding: 0.875rem 1.25rem;
+  border-radius: var(--radius-full);
+  margin: 0;
+}
+
+.form-error {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #b42318;
+  background: #fff4f2;
   padding: 0.875rem 1.25rem;
   border-radius: var(--radius-full);
   margin: 0;
